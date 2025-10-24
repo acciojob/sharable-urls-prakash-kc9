@@ -1,12 +1,20 @@
-// your code here
-let h3 = querySelector("#url");
+let h3 = document.querySelector("#url");
+let form = document.querySelector("#form");
 
-let submit = querySelector("#submit");
+form.addEventListener("submit", function(event) {
+  event.preventDefault(); // prevent page reload
 
+  let name = document.querySelector("#name").value.trim();
+  let year = document.querySelector("#year").value.trim();
 
-submit.addEventListener('click' , ()=>{
-	let name = document.querySelector('#name').value;
-	let year = document.querySelector('#year').value;
-	let temp = `https://localhost:8080/${name} ${year}` 
-	h3.textContent = temp;
-})
+  let baseURL = "https://localhost:8080/";
+  let query = [];
+
+  if (name) query.push(`name=${name}`);
+  if (year) query.push(`year=${year}`);
+
+  let finalURL = baseURL;
+  if (query.length > 0) finalURL += "?" + query.join("&");
+
+  h3.textContent = finalURL;
+});
