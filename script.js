@@ -1,20 +1,18 @@
-let h3 = document.querySelector("#url");
-let form = document.querySelector("#form");
+// script.js
+const h3 = document.querySelector("#url");
+const nameInput = document.querySelector("#name");
+const yearInput = document.querySelector("#year");
+const button = document.querySelector("#button");
 
-form.addEventListener("submit", function(event) {
-  event.preventDefault(); // prevent page reload
+button.addEventListener("click", (e) => {
+  e.preventDefault(); // safe if button is submit
+  const name = nameInput.value.trim();
+  const year = yearInput.value.trim();
 
-  let name = document.querySelector("#name").value.trim();
-  let year = document.querySelector("#year").value.trim();
+  const baseURL = "https://localhost:8080/";
+  const params = [];
+  if (name) params.push(`name=${encodeURIComponent(name)}`);
+  if (year) params.push(`year=${encodeURIComponent(year)}`);
 
-  let baseURL = "https://localhost:8080/";
-  let query = [];
-
-  if (name) query.push(`name=${name}`);
-  if (year) query.push(`year=${year}`);
-
-  let finalURL = baseURL;
-  if (query.length > 0) finalURL += "?" + query.join("&");
-
-  h3.textContent = finalURL;
+  h3.textContent = params.length ? baseURL + "?" + params.join("&") : baseURL;
 });
