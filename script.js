@@ -8,5 +8,5 @@ submit.addEventListener('click' , ()=>{
 	let name = document.querySelector('#name').value;
 	let year = document.querySelector('#year').value;
 	let temp = `https://localhost:8080/${name} ${year}` 
-	h3.textContent = 
+	h3.textContent = temp;
 })
